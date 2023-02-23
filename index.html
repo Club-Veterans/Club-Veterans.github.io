@@ -6,18 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
     <script src="carrito.js"></script>
-
+    <style>
+    .btn-comprar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+    
+    .btn-comprar {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>Venta de Servicios de Streaming en Guatemala</h1>
+  <h1>Club Veterans</h1>
 
   <h2>Servicios Disponibles:</h2>
 
   <ul>
     <li>
       <h3>1 Mes de Netflix</h3>
-      <p>Disfruta de 2 meses</p>
+      <p>Disfruta de 1 meses con todo su catalogo disponible en 4k</p>
       <p>Precio: Q35.00</p>
       <button class="boton-producto" data-nombre="Netflix" data-precio="35.00">Agregar al carrito</button>
     </li>
@@ -39,6 +51,12 @@
       <p>Precio: Q25.00</p>
       <button class="boton-producto" data-nombre="Crunchyroll" data-precio="25.00">Agregar al carrito</button>
     </li>
+    <li>
+      <h3>Combo de HBO + Amazon Prime Video</h3>
+      <p>Descripción del producto 3.</p>
+      <p>Precio: Q25.00</p>
+      <button class="boton-producto" data-nombre="Combo-HBO+Prime" data-precio="25.00">Agregar al carrito</button>
+    </li>
   </ul>
 
   <h2>Carrito de compras</h2>
@@ -56,7 +74,8 @@
     var totalCompra = 0;
     var productosEnCarrito = {};
 
-    for (var i = 0; i < botones.length; i++) {
+ 
+for (var i = 0; i < botones.length; i++) {
   botones[i].addEventListener("click", function() {
     var nombre = this.getAttribute("data-nombre");
     var precio = parseFloat(this.getAttribute("data-precio"));
@@ -64,14 +83,29 @@
     // Si el producto ya está en el carrito, actualizar su cantidad
     if (productosEnCarrito[nombre]) {
       productosEnCarrito[nombre].cantidad++;
-      productosEnCarrito[nombre].elemento.innerText = `${nombre} - Q${(precio * productosEnCarrito[nombre].cantidad).toFixed(2)}`;
+      productosEnCarrito[nombre].elementoCantidad.innerText = productosEnCarrito[nombre].cantidad;
+      productosEnCarrito[nombre].elementoPrecio.innerText = `Q${(precio * productosEnCarrito[nombre].cantidad).toFixed(2)}`;
     } else { // De lo contrario, agregar un nuevo producto al carrito
       var li = document.createElement("li");
-      var texto = document.createTextNode(`${nombre} - Q${precio.toFixed(2)}`);
+      var texto = document.createTextNode(nombre);
+      var spanCantidad = document.createElement("span");
+      var spanPrecio = document.createElement("span");
+
+      spanCantidad.innerText = 1;
+      spanCantidad.classList.add("cantidad");
+      spanPrecio.innerText = `Q${precio.toFixed(2)}`;
+      spanPrecio.classList.add("precio");
+
       li.appendChild(texto);
+      li.appendChild(spanCantidad);
+      li.appendChild(document.createTextNode(" mes(es) - "));
+      li.appendChild(spanPrecio);
       carrito.appendChild(li);
+
       productosEnCarrito[nombre] = {
         elemento: li,
+        elementoCantidad: spanCantidad,
+        elementoPrecio: spanPrecio,
         precio: precio,
         cantidad: 1
       };
@@ -81,9 +115,7 @@
     totalCompra += precio;
     total.innerText = `Q${totalCompra.toFixed(2)}`;
     
-
-
-
+  
     var btnComprar = document.getElementById("btn-comprar");
 
 btnComprar.addEventListener("click", function() {
