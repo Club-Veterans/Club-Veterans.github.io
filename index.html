@@ -19,6 +19,7 @@
       margin-bottom: 20px;
     }
   </style>
+
 </head>
 
 <body>
@@ -26,36 +27,57 @@
 
   <h2>Servicios Disponibles:</h2>
 
+  <p style="text-align: center;">Cuantas más veces le des en "AGREGAR AL CARRITO" más meses se agregan.</p>
+
   <ul>
-    <li>
-      <h3>1 Mes de Netflix</h3>
-      <p>Disfruta de 1 meses con todo su catalogo disponible en 4k</p>
-      <p>Precio: Q35.00</p>
-      <button class="boton-producto" data-nombre="Netflix" data-precio="35.00">Agregar al carrito</button>
+    <li class="productos">
+      <div class="producto">
+        <h3>1 Mes de Netflix</h3>
+        <p>Disfruta de un mes ilimitado de entretenimiento en línea con Netflix.</p>
+        <p>Precio: Q35.00</p>
+        <button class="boton-producto" data-nombre="Netflix1" data-precio="35.00">Agregar al carrito</button>
+      </div>
+    
+      <div class="producto">
+        <h3>2 Meses de Netflix</h3>
+        <p>2 meses de suscripción a Netflix para ver más series y películas de tu elección.</p>
+        <p>Precio: Q35.00</p>
+        <button class="boton-producto" data-nombre="Netflix2" data-precio="35.00">
+          Agregar al carrito
+        </button>
+      </div>
     </li>
-    <li>
-      <h3>1 mes de Disney+</h3>
-      <p>Descripción del producto 2.</p>
-      <p>Precio: Q25.00</p>
-      <button class="boton-producto" data-nombre="Disney+" data-precio="25.00">Agregar al carrito</button>
+
+    <li class="productos">
+      <div class="producto">
+        <h3>1 Mes de Disney+</h3>
+        <p>Descubre la magia de Disney+ durante un mes completo</p>
+        <p>Precio: Q25.00</p>
+        <button class="boton-producto-2" data-nombre="Disney+1" data-precio="35.00">Agregar al carrito</button>
+      </div>
+  
+      <div class="producto">
+        <h3>2 Meses de Disney+</h3>
+        <p>Sumérgete en el mundo mágico de Disney+ con 2 meses de suscripción.</p>
+        <p>Precio: Q40.00</p>
+        <button class="boton-producto-2" data-nombre="Disney+2" data-precio="35.00">Agregar al carrito</button>
+      </div>
     </li>
-    <li>
-      <h3>1 mes de Spotify</h3>
-      <p>Descripción del producto 3.</p>
-      <p>Precio: Q25.00</p>
-      <button class="boton-producto" data-nombre="Spotify" data-precio="25.00">Agregar al carrito</button>
-    </li>
-    <li>
-      <h3>1 mes de Crunchyroll</h3>
-      <p>Descripción del producto 3.</p>
-      <p>Precio: Q25.00</p>
-      <button class="boton-producto" data-nombre="Crunchyroll" data-precio="25.00">Agregar al carrito</button>
-    </li>
-    <li>
-      <h3>Combo de HBO + Amazon Prime Video</h3>
-      <p>Descripción del producto 3.</p>
-      <p>Precio: Q25.00</p>
-      <button class="boton-producto" data-nombre="Combo-HBO+Prime" data-precio="25.00">Agregar al carrito</button>
+
+    <li class="productos">
+      <div class="producto">
+        <h3>1 Mes de Spotify</h3>
+        <p>Descubre un mundo de música ilimitada con Spotify durante un mes completo.</p>
+        <p>Precio: Q25.00</p>
+        <button class="boton-producto-3" data-nombre="Spotify1" data-precio="35.00">Agregar al carrito</button>
+      </div>
+  
+      <div class="producto">
+        <h3>2 Meses de Spotify</h3>
+        <p>Descubre más música y ahorra con 2 meses completos de suscripción a Spotify.</p>
+        <p>Precio: Q40.00</p>
+        <button class="boton-producto-3" data-nombre="Spotify2" data-precio="35.00">Agregar al carrito</button>
+      </div>
     </li>
   </ul>
 
@@ -64,17 +86,16 @@
   <ul id="carrito">
   </ul>
 
-  <p>Total de la compra: <span id="total">0.00</span></p>
+  <p style="text-align: center;">Total de la compra: <span id="total">0.00</span></p>
   <button id="btn-comprar"class="btn-comprar">Comprar por WhatsApp</button>
 
   <script>
-    var botones = document.getElementsByClassName("boton-producto");
+    var botones = document.querySelectorAll(".boton-producto, .boton-producto-2, .boton-producto-3");
     var carrito = document.getElementById("carrito");
     var total = document.getElementById("total");
     var totalCompra = 0;
     var productosEnCarrito = {};
 
- 
 for (var i = 0; i < botones.length; i++) {
   botones[i].addEventListener("click", function() {
     var nombre = this.getAttribute("data-nombre");
@@ -110,12 +131,9 @@ for (var i = 0; i < botones.length; i++) {
         cantidad: 1
       };
     }
-
     // Actualizar el total de la compra
     totalCompra += precio;
     total.innerText = `Q${totalCompra.toFixed(2)}`;
-    
-  
     var btnComprar = document.getElementById("btn-comprar");
 
 btnComprar.addEventListener("click", function() {
@@ -134,12 +152,8 @@ Total de la compra: *Q${totalCompra.toFixed(2)}*`;
   window.open(url);
 });
 
-
-
   });
 }
   </script>
-
 </body>
-
 </html>
